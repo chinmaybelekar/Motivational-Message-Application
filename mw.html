@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title> Random Quote Generator Application </title>
+		<style>
+				* { font-size: 40px; font-family: Arial, Courier; }
+				body { background-color: lightblue; }
+		</style>
+		<script>
+			function gq()
+			{
+				event.preventDefault();
+				let ans = document.getElementById("ans");
+				let author = document.getElementById("author");
+				let urladd = "http://api.quotable.io/random";
+				fetch(urladd)
+				.then(res => res.json())
+				.then(data => {
+								ans.innerHTML = data.content
+								author.innerHTML = data.author
+								}
+					)
+				.catch(err => ans.innerHTML = "issue" + err);
+			}
+		</script>					
+	</head>
+	<body>
+		<center>
+			<h1> Motivational Message Application </h1>
+			<form onsubmit="return gq()">
+				<input type="submit" value="Get Quote" />
+			</form>
+			<h1 id="ans"> </h1>
+			<h1 id="author"> </h1>
+		</center>
+	</body>
+</html>
